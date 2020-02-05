@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/main.html">
+    <div layout:fragment = "contentPart">
+        <div class="row mb-5">
+            <div class="col-sm-6 offset-3">
+                <h1 th:text = "${item.id + ' ' + item.name + ' for ' + item.price +' KZT'}">
+                </h1>
+            </div>
+        </div>
+    </div>
+</html>
