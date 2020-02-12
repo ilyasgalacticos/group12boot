@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/main.html">
+    <div layout:fragment = "contentPart">
+        <div class="row mb-5">
+            <div class="col-sm-12">
+                <h1>
+                    Welcome <span th:text = "${user.fullName}"></span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</html>

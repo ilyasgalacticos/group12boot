@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8">
         <title>Instagram</title>
@@ -8,18 +9,38 @@
     </head>
     <body>
         <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(191,102,24,0.98)">
+            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(191,102,24,0.98)" sec:authorize="isAnonymous()">
                 <a class="navbar-brand" href="/">Instagram</a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Login</span></a>
+                            <a class="nav-link" th:href="@{'/login'}">Login</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Register</a>
                         </li>
                     </ul>
                 </div>
+            </nav>
+            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(191,102,24,0.98)" sec:authorize="isAuthenticated()">
+                <a class="navbar-brand" href="/">Instagram</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{'/profile'}">Profile</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="JavaScript:void(0)" onclick="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <form th:action = "@{'/logout'}" method="post" id="logoutFormId">
+                </form>
+                <script>
+                    function logout() {
+                        document.getElementById("logoutFormId").submit();
+                    }
+                </script>
             </nav>
         </div>
         <div class="container-fluid mt-5" layout:fragment="contentPart" style="min-height: 800px;">
