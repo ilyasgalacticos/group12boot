@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -23,5 +24,8 @@ public class Items {
 
     @Column(name = "price")
     private int price;
+
+    @Column(name = "deleted_at")
+    private Date deletedAt;
 
 }

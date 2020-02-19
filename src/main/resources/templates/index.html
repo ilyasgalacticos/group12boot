@@ -1,9 +1,11 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/main.html">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorator="layout/main.html">
     <div layout:fragment = "contentPart">
         <div class="row mb-5">
             <div class="col-sm-6 offset-3">
-                <form action="/add" method="post" class="form">
+                <form th:action="@{'/add'}" method="post" class="form">
                     <div class="form-group">
                         <label>
                             NAME :
@@ -49,6 +51,14 @@
                             </td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <a class="btn btn-info btn-sm ml-1" th:each = "i : ${#numbers.sequence(1, tabSize)}" th:text = "${i}" th:href = "@{'/?page=' + ${i}}">
+                                </a>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
