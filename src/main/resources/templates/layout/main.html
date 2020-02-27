@@ -9,31 +9,35 @@
     </head>
     <body>
         <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(191,102,24,0.98)" sec:authorize="isAnonymous()">
+            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(191,102,24,0.98)" >
                 <a class="navbar-brand" href="/">Instagram</a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{'/login'}">Login</span></a>
+                            <a class="nav-link" th:href="@{'/login'}" sec:authorize="isAnonymous()" th:text="#{label.signin}"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link" href="#" sec:authorize="isAnonymous()" th:text = "#{label.register}"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{'/profile'}" sec:authorize="isAuthenticated()">Profile</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="JavaScript:void(0)" onclick="logout()" sec:authorize="isAuthenticated()">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{'?lng=en'}">ENG</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{'?lng=kz'}">КАЗ</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{'?lng=ru'}">РУС</span></a>
                         </li>
                     </ul>
                 </div>
             </nav>
-            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(191,102,24,0.98)" sec:authorize="isAuthenticated()">
-                <a class="navbar-brand" href="/">Instagram</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{'/profile'}">Profile</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="JavaScript:void(0)" onclick="logout()">Logout</a>
-                        </li>
-                    </ul>
-                </div>
+            <div sec:authorize="isAuthenticated()">
                 <form th:action = "@{'/logout'}" method="post" id="logoutFormId">
                 </form>
                 <script>
@@ -41,7 +45,7 @@
                         document.getElementById("logoutFormId").submit();
                     }
                 </script>
-            </nav>
+            </div>
         </div>
         <div class="container-fluid mt-5" layout:fragment="contentPart" style="min-height: 800px;">
         </div>
