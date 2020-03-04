@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+	</head>
+	<body>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>NAME</th>
+						<th>PRICE</th>
+						<th>DELETE</th>
+					</tr>
+				</thead>
+				<tbody id = "result">
+					
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript">
+
+			$(document).ready(loadItems());
+
+			function loadItems(){
+				$.get("http://localhost:8004/api/allitems", {}, function(json){
+
+					html = "";
+					for(i=0;i<json.length;i++){
+						html+="<tr>";
+						html+="<td>"+json[i].id+"</td>";
+						html+="<td>"+json[i].name+"</td>";
+						html+="<td>"+json[i].price+"</td>";
+						html+="<td><button onclick = 'deleteItem("+json[i].id+")'>Delete</button></td>";
+						html+="</tr>";
+					}
+
+					$("#result").html(html);
+
+				});
+			}
+
+			function deleteItem(idshka){
+				$.post("http://localhost:8004/api/delete", {
+					id : idshka
+				}, function(res){
+					alert(res);
+					loadItems();
+				});
+			}
+
+		</script>
+	</body>
+</html>

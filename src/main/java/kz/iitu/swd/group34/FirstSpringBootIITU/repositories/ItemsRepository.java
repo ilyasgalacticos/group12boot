@@ -11,6 +11,7 @@ public interface ItemsRepository extends JpaRepository<Items, Long> {
 
     Optional<Items> findByIdAndDeletedAtNull(Long id);
     List<Items> findAllByDeletedAtNull(Pageable pageable);
+    List<Items> findAllByDeletedAtNull();
     int countAllByDeletedAtNull();
 
 }
